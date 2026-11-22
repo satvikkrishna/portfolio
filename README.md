@@ -1,29 +1,42 @@
-# Welcome to your Lovable project
+# Portfolio
 
-This project was built with [Lovable](https://lovable.dev).
+My personal portfolio: AI systems, product and design work. Every section is
+driven from a Postgres-backed CMS that I edit through a built-in admin panel,
+so updating projects, experience or the photo gallery never needs a redeploy.
 
-## Build with Lovable
+## Highlights
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+- **CMS-driven sections:** hero, about, experience, education, projects, skills,
+  a photography "lens" gallery and contact, all read from Supabase tables
+- **Admin panel** (`/admin`): authenticated editors for each section, a theme
+  editor and résumé upload, with role-based access via a `user_roles` table and
+  row-level security
+- **Motion that respects users:** scroll reveals and transitions that switch off
+  under `prefers-reduced-motion`
+- **Server-rendered** public pages with TanStack Start; the admin route is
+  client-only
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## Stack
 
-## Development
+| Layer | Tech |
+|---|---|
+| Framework | TanStack Start, React 19, TypeScript, Vite |
+| Styling | Tailwind CSS v4, shadcn/ui (Radix primitives) |
+| Data and auth | Supabase (Postgres, Auth, Storage, RLS) |
+| Hosting | Vercel |
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Data model
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+`site_content` (singleton copy and theme), `projects`, `experiences`,
+`skill_groups`, `lens_images`, `gallery_images`, `user_roles`.
+Migrations live in [`supabase/migrations`](supabase/migrations).
+
+## Run locally
+
+```bash
+npm install
+# .env needs VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY
 npm run dev
 ```
 
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+Build with `npm run build`, then preview with `npm run preview`.
